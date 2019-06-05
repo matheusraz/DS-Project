@@ -1,0 +1,1748 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{MachineLearning}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Video Game Sales}\label{video-game-sales}
+
+\texttt{Matheus\ Raz\ (mrol@cin.ufpe.br)}
+
+\texttt{João\ Paulo\ Lins\ (jplo@cin.ufpe.br)}
+
+    \subsection{Aprendizagem (etapa 2)}\label{aprendizagem-etapa-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPClassifier}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPRegressor}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vgsalesPP.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}77}]:}                                                     Name Platform  \textbackslash{}
+         0                                             Wii Sports      Wii   
+         1                                      Super Mario Bros.      NES   
+         2                                         Mario Kart Wii      Wii   
+         3                                      Wii Sports Resort      Wii   
+         4                               Pokemon Red/Pokemon Blue       GB   
+         5                                                 Tetris       GB   
+         6                                  New Super Mario Bros.       DS   
+         7                                               Wii Play      Wii   
+         8                              New Super Mario Bros. Wii      Wii   
+         9                                              Duck Hunt      NES   
+         10                                            Nintendogs       DS   
+         11                                         Mario Kart DS       DS   
+         12                           Pokemon Gold/Pokemon Silver       GB   
+         13                                               Wii Fit      Wii   
+         14                                    Kinect Adventures!     X360   
+         15                                          Wii Fit Plus      Wii   
+         16                                    Grand Theft Auto V      PS3   
+         17                         Grand Theft Auto: San Andreas      PS2   
+         18                                     Super Mario World     SNES   
+         19          Brain Age: Train Your Brain in Minutes a Day       DS   
+         20                         Pokemon Diamond/Pokemon Pearl       DS   
+         21                                      Super Mario Land       GB   
+         22                                   Super Mario Bros. 3      NES   
+         23                                    Grand Theft Auto V     X360   
+         24                           Grand Theft Auto: Vice City      PS2   
+         25                         Pokemon Ruby/Pokemon Sapphire      GBA   
+         26           Brain Age 2: More Training in Minutes a Day       DS   
+         27                           Pokemon Black/Pokemon White       DS   
+         28                                Gran Turismo 3: A-Spec      PS2   
+         29                        Call of Duty: Modern Warfare 3     X360   
+         {\ldots}                                                  {\ldots}      {\ldots}   
+         16382              Help Wanted: 50 Wacky Jobs (jp sales)      Wii   
+         16383  Yattaman Wii: BikkuriDokkiri Machine de Mou Ra{\ldots}      Wii   
+         16384                              Neo Angelique Special      PSP   
+         16385                      Outdoors Unleashed: Africa 3D      3DS   
+         16386                                          Real Rode      PS2   
+         16387                                     Pony Friends 2       PC   
+         16388                       Dynasty Warriors: Eiketsuden      PS3   
+         16389                  Metal Gear Solid V: Ground Zeroes       PC   
+         16390                                  PGA European Tour      N64   
+         16391                                     Carmageddon 64      N64   
+         16392                                    Planet Monsters      GBA   
+         16393                                             Breach       PC   
+         16394                                   Bust-A-Move 3000       GC   
+         16395                                   Mega Brain Boost       DS   
+         16396                              The Longest 5 Minutes      PSV   
+         16397                           Mezase!! Tsuri Master DS       DS   
+         16398  Eiyuu Densetsu: Sora no Kiseki Material Collec{\ldots}      PSP   
+         16399                            STORM: Frontline Nation       PC   
+         16400                                   Strawberry Nauts      PSV   
+         16401                                           Plushees       DS   
+         16402                                            15 Days       PC   
+         16403                      Men in Black II: Alien Escape       GC   
+         16404                                   Aiyoku no Eustia      PSV   
+         16405                 Woody Woodpecker in Crazy Castle 5      GBA   
+         16406   SCORE International Baja 1000: The Official Game      PS2   
+         16407                      Samurai Warriors: Sanada Maru      PS3   
+         16408                                   LMA Manager 2007     X360   
+         16409                            Haitaka no Psychedelica      PSV   
+         16410                                   Spirits \& Spells      GBA   
+         16411                                Winning Post 8 2016      PSV   
+         
+                Year\_of\_Release         Genre                     Publisher  NA\_Sales  \textbackslash{}
+         0                 2006        Sports                      Nintendo  1.000000   
+         1                 1985      Platform                      Nintendo  0.703095   
+         2                 2008        Racing                      Nintendo  0.379110   
+         3                 2009        Sports                      Nintendo  0.377418   
+         4                 1996  Role-Playing                      Nintendo  0.272485   
+         5                 1989        Puzzle                      Nintendo  0.560928   
+         6                 2006      Platform                      Nintendo  0.272727   
+         7                 2006          Misc                      Nintendo  0.337524   
+         8                 2009      Platform                      Nintendo  0.349130   
+         9                 1984       Shooter                      Nintendo  0.651112   
+         10                2005    Simulation                      Nintendo  0.218810   
+         11                2005        Racing                      Nintendo  0.234768   
+         12                1999  Role-Playing                      Nintendo  0.217602   
+         13                2007        Sports                      Nintendo  0.215667   
+         14                2010          Misc        Microsoft Game Studios  0.362669   
+         15                2009        Sports                      Nintendo  0.217843   
+         16                2013        Action          Take-Two Interactive  0.169729   
+         17                2004        Action          Take-Two Interactive  0.227998   
+         18                1990      Platform                      Nintendo  0.308994   
+         19                2005          Misc                      Nintendo  0.114603   
+         20                2006  Role-Playing                      Nintendo  0.154255   
+         21                1989      Platform                      Nintendo  0.261847   
+         22                1988      Platform                      Nintendo  0.230658   
+         23                2013        Action          Take-Two Interactive  0.233559   
+         24                2002        Action          Take-Two Interactive  0.203337   
+         25                2002  Role-Playing                      Nintendo  0.146518   
+         26                2005        Puzzle                      Nintendo  0.082930   
+         27                2010  Role-Playing                      Nintendo  0.133221   
+         28                2001        Racing   Sony Computer Entertainment  0.165619   
+         29                2011       Shooter                    Activision  0.218569   
+         {\ldots}                {\ldots}           {\ldots}                           {\ldots}       {\ldots}   
+         16382             2008    Simulation                   Hudson Soft  0.000000   
+         16383             2008        Racing                   Takara Tomy  0.000000   
+         16384             2008     Adventure                    Tecmo Koei  0.000000   
+         16385             2011        Sports                       Mastiff  0.000242   
+         16386             2008     Adventure               Kadokawa Shoten  0.000000   
+         16387             2009    Simulation             Eidos Interactive  0.000000   
+         16388             2016        Action                    Tecmo Koei  0.000000   
+         16389             2014        Action  Konami Digital Entertainment  0.000000   
+         16390             2000        Sports                    Infogrames  0.000242   
+         16391             1999        Action            Virgin Interactive  0.000242   
+         16392             2001        Action                         Titus  0.000242   
+         16393             2011       Shooter                     Destineer  0.000242   
+         16394             2003        Puzzle                       Ubisoft  0.000242   
+         16395             2008        Puzzle         Majesco Entertainment  0.000242   
+         16396             2016        Action          Nippon Ichi Software  0.000000   
+         16397             2009        Sports                   Hudson Soft  0.000000   
+         16398             2007  Role-Playing            Falcom Corporation  0.000000   
+         16399             2011      Strategy                       Unknown  0.000000   
+         16400             2016     Adventure                       Unknown  0.000000   
+         16401             2008    Simulation                     Destineer  0.000242   
+         16402             2009     Adventure             DTP Entertainment  0.000000   
+         16403             2003       Shooter                    Infogrames  0.000242   
+         16404             2014          Misc               dramatic create  0.000000   
+         16405             2002      Platform                         Kemco  0.000242   
+         16406             2008        Racing                    Activision  0.000000   
+         16407             2016        Action                    Tecmo Koei  0.000000   
+         16408             2006        Sports                   Codemasters  0.000000   
+         16409             2016     Adventure                  Idea Factory  0.000000   
+         16410             2003      Platform                       Wanadoo  0.000242   
+         16411             2016    Simulation                    Tecmo Koei  0.000000   
+         
+                EU\_Sales  JP\_Sales  Other\_Sales  Global\_Sales {\ldots}    XB  XOne   AO  \textbackslash{}
+         0      1.000000  0.368885     0.799432      1.000000 {\ldots}   0.0   0.0  0.0   
+         1      0.123619  0.666341     0.072848      0.487580 {\ldots}   0.0   0.0  0.0   
+         2      0.440608  0.370841     0.311258      0.430389 {\ldots}   0.0   0.0  0.0   
+         3      0.377417  0.320939     0.279092      0.397068 {\ldots}   0.0   0.0  0.0   
+         4      0.306975  1.000000     0.094607      0.380104 {\ldots}   0.0   0.0  0.0   
+         5      0.078039  0.412916     0.054872      0.366655 {\ldots}   0.0   0.0  0.0   
+         6      0.315608  0.636008     0.272469      0.361081 {\ldots}   0.0   0.0  0.0   
+         7      0.316989  0.286693     0.268685      0.350418 {\ldots}   0.0   0.0  0.0   
+         8      0.239641  0.459883     0.211921      0.343148 {\ldots}   0.0   0.0  0.0   
+         9      0.021754  0.027397     0.044465      0.343027 {\ldots}   0.0   0.0  0.0   
+         10     0.378108  0.188845     0.259224      0.298922 {\ldots}   0.0   0.0  0.0   
+         11     0.257942  0.404110     0.179754      0.281231 {\ldots}   0.0   0.0  0.0   
+         12     0.213398  0.704501     0.067171      0.279898 {\ldots}   0.0   0.0  0.0   
+         13     0.277279  0.352250     0.203406      0.275051 {\ldots}   0.0   0.0  0.0   
+         14     0.168854  0.023483     0.159886      0.264268 {\ldots}   0.0   0.0  0.0   
+         15     0.293163  0.247554     0.167455      0.264025 {\ldots}   0.0   0.0  0.0   
+         16     0.313881  0.095890     0.374645      0.254938 {\ldots}   0.0   0.0  0.0   
+         17     0.013812  0.040117     1.000000      0.252151 {\ldots}   0.0   0.0  0.0   
+         18     0.129489  0.346380     0.052034      0.249727 {\ldots}   0.0   0.0  0.0   
+         19     0.317680  0.407045     0.192999      0.244154 {\ldots}   0.0   0.0  0.0   
+         20     0.154006  0.590998     0.128666      0.221132 {\ldots}   0.0   0.0  0.0   
+         21     0.093577  0.409002     0.039735      0.219799 {\ldots}   0.0   0.0  0.0   
+         22     0.118785  0.375734     0.043519      0.209378 {\ldots}   0.0   0.0  0.0   
+         23     0.177486  0.005871     0.133396      0.197140 {\ldots}   0.0   0.0  0.0   
+         24     0.189572  0.045988     0.168401      0.195686 {\ldots}   0.0   0.0  0.0   
+         25     0.134669  0.526419     0.047304      0.192051 {\ldots}   0.0   0.0  0.0   
+         26     0.184738  0.520548     0.111637      0.185266 {\ldots}   0.0   0.0  0.0   
+         27     0.109461  0.552838     0.075686      0.183448 {\ldots}   0.0   0.0  0.0   
+         28     0.175760  0.182975     0.109745      0.181510 {\ldots}   0.0   0.0  0.0   
+         29     0.146409  0.012720     0.124882      0.178481 {\ldots}   0.0   0.0  0.0   
+         {\ldots}         {\ldots}       {\ldots}          {\ldots}           {\ldots} {\ldots}   {\ldots}   {\ldots}  {\ldots}   
+         16382  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16383  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16384  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16385  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16386  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16387  0.000345  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16388  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16389  0.000345  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16390  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16391  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16392  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16393  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16394  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16395  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16396  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16397  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16398  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16399  0.000345  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16400  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16401  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16402  0.000345  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16403  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16404  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16405  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16406  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16407  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16408  0.000345  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16409  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16410  0.000000  0.000000     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         16411  0.000000  0.000978     0.000000      0.000121 {\ldots}   0.0   0.0  0.0   
+         
+                  E  E10+   EC  K-A    M   RP    T  
+         0      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         1      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         2      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         3      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         4      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         5      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         6      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         7      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         8      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         9      1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         10     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         11     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         12     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         13     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         14     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         15     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16     0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         17     0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         18     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         19     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         20     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         21     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         22     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         23     0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         24     0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         25     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         26     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         27     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         28     1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         29     0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         {\ldots}    {\ldots}   {\ldots}  {\ldots}  {\ldots}  {\ldots}  {\ldots}  {\ldots}  
+         16382  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16383  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16384  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16385  0.0   0.0  0.0  0.0  0.0  0.0  1.0  
+         16386  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16387  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16388  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16389  0.0   0.0  0.0  0.0  1.0  0.0  0.0  
+         16390  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16391  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16392  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16393  0.0   0.0  0.0  0.0  0.0  0.0  1.0  
+         16394  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16395  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16396  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16397  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16398  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16399  0.0   1.0  0.0  0.0  0.0  0.0  0.0  
+         16400  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16401  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16402  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16403  0.0   0.0  0.0  0.0  0.0  0.0  1.0  
+         16404  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16405  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16406  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16407  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16408  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16409  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16410  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         16411  1.0   0.0  0.0  0.0  0.0  0.0  0.0  
+         
+         [16412 rows x 68 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:}                  Year\_of\_Release  NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales  \textbackslash{}
+         Year\_of\_Release         1.000000 -0.092284  0.004059 -0.168594     0.037807   
+         NA\_Sales               -0.092284  1.000000  0.766537  0.451171     0.638497   
+         EU\_Sales                0.004059  0.766537  1.000000  0.435870     0.722675   
+         JP\_Sales               -0.168594  0.451171  0.435870  1.000000     0.291481   
+         Other\_Sales             0.037807  0.638497  0.722675  0.291481     1.000000   
+         Global\_Sales           -0.076242  0.941238  0.901664  0.613301     0.748904   
+         Critic\_Score            0.113911  0.153352  0.170540 -0.043449     0.175807   
+         User\_Score              0.142948  0.139266  0.152137 -0.032089     0.164654   
+         Genre\_Labels           -0.130105  0.020071  0.019748  0.031198     0.011930   
+         Platform\_Labels         0.171548  0.041374  0.044551 -0.080995     0.054400   
+         Rating\_Labels           0.128514  0.037904  0.049772 -0.062798     0.068568   
+         Action                  0.133094 -0.001892  0.008413 -0.048716     0.019852   
+         Adventure               0.088165 -0.066224 -0.055972 -0.035837    -0.054349   
+         Fighting               -0.072302 -0.000205 -0.012702  0.019088    -0.005944   
+         Misc                    0.051035 -0.013266 -0.015518 -0.016985    -0.008416   
+         Platform.1             -0.106335  0.070246  0.037982  0.053625     0.013162   
+         Puzzle                 -0.040517 -0.011868 -0.021890  0.012766    -0.026249   
+         Racing                 -0.078625  0.009410  0.025391 -0.029561     0.021071   
+         Role-Playing            0.033768 -0.015890 -0.011777  0.161811    -0.012662   
+         Shooter                -0.022610  0.066877  0.055779 -0.045883     0.049871   
+         Simulation              0.005879 -0.015141 -0.006260 -0.003099    -0.014797   
+         Sports                 -0.067681  0.013273  0.011925 -0.026133     0.020741   
+         Strategy               -0.030824 -0.041231 -0.032416 -0.003500    -0.034823   
+         2600                   -0.349437  0.044519 -0.017329 -0.021308    -0.018131   
+         3DO                    -0.027186 -0.004361 -0.003894 -0.001967    -0.003426   
+         3DS                     0.202669 -0.022511 -0.009341  0.067938    -0.020753   
+         DC                     -0.062763 -0.010996 -0.012624  0.015567    -0.012730   
+         DS                      0.111278 -0.039917 -0.043478  0.004800    -0.040628   
+         GB                     -0.138086  0.085417  0.052257  0.197831     0.014933   
+         GBA                    -0.126333 -0.010177 -0.023810 -0.013975    -0.045441   
+         {\ldots}                          {\ldots}       {\ldots}       {\ldots}       {\ldots}          {\ldots}   
+         GG                     -0.019236 -0.002518 -0.002248 -0.000969    -0.001978   
+         N64                    -0.189604  0.030006 -0.004483  0.012688    -0.025347   
+         NES                    -0.254889  0.096603  0.010659  0.230991     0.002679   
+         NG                     -0.055154 -0.008724 -0.007791  0.003593    -0.006854   
+         PC                      0.102076 -0.050349  0.000525 -0.062528    -0.032569   
+         PCFX                   -0.013925 -0.002518 -0.002248 -0.001219    -0.001978   
+         PS                     -0.403360  0.005837  0.017867  0.034862    -0.020040   
+         PS2                    -0.124919  0.002440  0.007848 -0.017318     0.085856   
+         PS3                     0.217741  0.012401  0.060569 -0.016841     0.086527   
+         PS4                     0.230376  0.002525  0.065959 -0.019052     0.062897   
+         PSP                     0.106897 -0.059565 -0.050271 -0.013518    -0.020108   
+         PSV                     0.212312 -0.046886 -0.037208 -0.014467    -0.028334   
+         SAT                    -0.183610 -0.032765 -0.029091  0.035746    -0.025931   
+         SCD                    -0.041161 -0.002277 -0.003245 -0.000223    -0.003999   
+         SNES                   -0.261404 -0.001185 -0.015916  0.159685    -0.022099   
+         TG16                   -0.021571 -0.003561 -0.003180  0.000048    -0.002797   
+         WS                     -0.021102 -0.006168 -0.005508  0.009706    -0.004846   
+         Wii                     0.122971  0.040730  0.031506 -0.023919     0.019752   
+         WiiU                    0.115987 -0.000580  0.004664  0.003012    -0.003640   
+         X360                    0.164444  0.076301  0.040287 -0.062814     0.032120   
+         XB                     -0.109984 -0.010371 -0.032103 -0.056030    -0.044743   
+         XOne                    0.177969  0.017027  0.015305 -0.030672     0.006630   
+         AO                     -0.001975  0.009490  0.007140 -0.001971     0.001756   
+         E                      -0.204851 -0.046121 -0.058238  0.083270    -0.082818   
+         E10+                    0.150476 -0.006005 -0.008675 -0.048688     0.006403   
+         EC                      0.008500 -0.001966 -0.005761 -0.005577    -0.003982   
+         K-A                    -0.022586  0.009726 -0.001495  0.017718    -0.002708   
+         M                       0.126955  0.086100  0.105445 -0.038436     0.114313   
+         RP                      0.005992 -0.002518 -0.001786 -0.001971    -0.001563   
+         T                       0.050496 -0.003826 -0.000786 -0.039824     0.012325   
+         
+                          Global\_Sales  Critic\_Score  User\_Score  Genre\_Labels  \textbackslash{}
+         Year\_of\_Release     -0.076242      0.113911    0.142948     -0.130105   
+         NA\_Sales             0.941238      0.153352    0.139266      0.020071   
+         EU\_Sales             0.901664      0.170540    0.152137      0.019748   
+         JP\_Sales             0.613301     -0.043449   -0.032089      0.031198   
+         Other\_Sales          0.748904      0.175807    0.164654      0.011930   
+         Global\_Sales         1.000000      0.148500    0.135987      0.024624   
+         Critic\_Score         0.148500      1.000000    0.818206      0.069877   
+         User\_Score           0.135987      0.818206    1.000000      0.046055   
+         Genre\_Labels         0.024624      0.069877    0.046055      1.000000   
+         Platform\_Labels      0.026568      0.169235    0.200057      0.023719   
+         Rating\_Labels        0.031828      0.518467    0.550275     -0.059398   
+         Action              -0.005561      0.052922    0.080912     -0.655339   
+         Adventure           -0.066707     -0.141741   -0.126063     -0.303662   
+         Fighting            -0.001187     -0.000611    0.012766     -0.179352   
+         Misc                -0.016393     -0.128596   -0.139842     -0.172548   
+         Platform.1           0.061538      0.029614    0.018569     -0.057659   
+         Puzzle              -0.013903     -0.040003   -0.085862      0.004367   
+         Racing               0.009822      0.053052    0.028890      0.081969   
+         Role-Playing         0.018515      0.020261    0.047309      0.174538   
+         Shooter              0.050127      0.134708    0.133745      0.240032   
+         Simulation          -0.012400     -0.036616   -0.026477      0.254281   
+         Sports               0.008147      0.031762    0.002053      0.546200   
+         Strategy            -0.037065     -0.010627    0.003714      0.334003   
+         2600                 0.011329     -0.079027   -0.074083     -0.032245   
+         3DO                 -0.004364     -0.012665   -0.011873      0.000312   
+         3DS                 -0.003804     -0.059022   -0.046272     -0.063626   
+         DC                  -0.008301     -0.015796   -0.014420     -0.004460   
+         DS                  -0.039022     -0.132093   -0.161279     -0.024214   
+         GB                   0.103108     -0.072224   -0.067706      0.016554   
+         GBA                 -0.021276      0.020456   -0.048069     -0.023931   
+         {\ldots}                       {\ldots}           {\ldots}         {\ldots}           {\ldots}   
+         GG                  -0.002486     -0.007312   -0.006854     -0.001893   
+         N64                  0.013807     -0.131242   -0.123032      0.035965   
+         NES                  0.100614     -0.072597   -0.068056      0.002626   
+         NG                  -0.007227     -0.025337   -0.023752     -0.016139   
+         PC                  -0.042581      0.153374    0.158269      0.100278   
+         PCFX                -0.002536     -0.007312   -0.006854      0.004326   
+         PS                   0.013344     -0.169873   -0.165945      0.057547   
+         PS2                  0.010658      0.082215    0.118569      0.023297   
+         PS3                  0.033203      0.080639    0.094829     -0.027007   
+         PS4                  0.026541      0.055835    0.050208     -0.039210   
+         PSP                 -0.052749     -0.060512   -0.053442     -0.039607   
+         PSV                 -0.043041     -0.063162   -0.035472     -0.082027   
+         SAT                 -0.022671     -0.096679   -0.090631      0.014579   
+         SCD                 -0.002760     -0.017913   -0.016792      0.003826   
+         SNES                 0.023394     -0.113865   -0.106742      0.043190   
+         TG16                -0.003233     -0.010341   -0.009694     -0.001212   
+         WS                  -0.003679     -0.017913   -0.016792      0.017370   
+         Wii                  0.029271     -0.047442   -0.029136      0.001179   
+         WiiU                 0.001346      0.025871    0.037531     -0.049163   
+         X360                 0.044473      0.129497    0.145499      0.004415   
+         XB                  -0.032405      0.176701    0.129764      0.039507   
+         XOne                 0.008612      0.057322    0.052440     -0.018284   
+         AO                   0.007071      0.012952    0.011340     -0.010185   
+         E                   -0.036509     -0.569374   -0.592969      0.101060   
+         E10+                -0.014938      0.161750    0.149437     -0.079145   
+         EC                  -0.004450     -0.020685   -0.014154     -0.016352   
+         K-A                  0.007857     -0.001091    0.018054      0.012281   
+         M                    0.085563      0.309860    0.323843     -0.064598   
+         RP                  -0.002536      0.006415    0.007532      0.012618   
+         T                   -0.008694      0.360702    0.387584     -0.019252   
+         
+                          Platform\_Labels    {\ldots}           XB      XOne        AO  \textbackslash{}
+         Year\_of\_Release         0.171548    {\ldots}    -0.109984  0.177969 -0.001975   
+         NA\_Sales                0.041374    {\ldots}    -0.010371  0.017027  0.009490   
+         EU\_Sales                0.044551    {\ldots}    -0.032103  0.015305  0.007140   
+         JP\_Sales               -0.080995    {\ldots}    -0.056030 -0.030672 -0.001971   
+         Other\_Sales             0.054400    {\ldots}    -0.044743  0.006630  0.001756   
+         Global\_Sales            0.026568    {\ldots}    -0.032405  0.008612  0.007071   
+         Critic\_Score            0.169235    {\ldots}     0.176701  0.057322  0.012952   
+         User\_Score              0.200057    {\ldots}     0.129764  0.052440  0.011340   
+         Genre\_Labels            0.023719    {\ldots}     0.039507 -0.018284 -0.010185   
+         Platform\_Labels         1.000000    {\ldots}     0.356487  0.209052  0.012269   
+         Rating\_Labels           0.212778    {\ldots}     0.134803  0.036860 -0.008293   
+         Action                  0.025635    {\ldots}    -0.006870  0.043978  0.015542   
+         Adventure              -0.026047    {\ldots}    -0.038995 -0.010093 -0.002281   
+         Fighting                0.031767    {\ldots}     0.003913 -0.012732 -0.001810   
+         Misc                   -0.016369    {\ldots}    -0.035280 -0.010749 -0.002651   
+         Platform.1             -0.065962    {\ldots}     0.007584 -0.018268 -0.001856   
+         Puzzle                 -0.121153    {\ldots}    -0.032176 -0.023426 -0.001479   
+         Racing                  0.047611    {\ldots}     0.066704  0.002978 -0.002217   
+         Role-Playing           -0.042634    {\ldots}    -0.048760 -0.014478 -0.002458   
+         Shooter                 0.092801    {\ldots}     0.063459  0.034321 -0.002286   
+         Simulation             -0.084489    {\ldots}    -0.022617 -0.019948 -0.001829   
+         Sports                  0.087240    {\ldots}     0.043219  0.004745 -0.003156   
+         Strategy               -0.025956    {\ldots}    -0.016933 -0.017965 -0.001613   
+         2600                   -0.159743    {\ldots}    -0.019136 -0.010429 -0.000659   
+         3DO                    -0.023985    {\ldots}    -0.003067 -0.001671 -0.000106   
+         3DS                    -0.296875    {\ldots}    -0.040701 -0.022182 -0.001401   
+         DC                     -0.086535    {\ldots}    -0.012787 -0.006969 -0.000440   
+         DS                     -0.545285    {\ldots}    -0.087379 -0.047621 -0.003007   
+         GB                     -0.099925    {\ldots}    -0.017489 -0.009531 -0.000602   
+         GBA                    -0.263852    {\ldots}    -0.050870 -0.027723 -0.001751   
+         {\ldots}                          {\ldots}    {\ldots}          {\ldots}       {\ldots}       {\ldots}   
+         GG                     -0.006385    {\ldots}    -0.001771 -0.000965 -0.000061   
+         N64                    -0.097871    {\ldots}    -0.031780 -0.017320 -0.001094   
+         NES                    -0.044877    {\ldots}    -0.017579 -0.009581 -0.000605   
+         NG                     -0.012430    {\ldots}    -0.006135 -0.003344 -0.000211   
+         PC                     -0.084384    {\ldots}    -0.056284 -0.030674 -0.001937   
+         PCFX                   -0.001722    {\ldots}    -0.001771 -0.000965 -0.000061   
+         PS                     -0.028262    {\ldots}    -0.063417 -0.034562 -0.002183   
+         PS2                     0.007102    {\ldots}    -0.087521 -0.047698 -0.003012   
+         PS3                     0.040544    {\ldots}    -0.066691 -0.036346 -0.002295   
+         PS4                     0.040260    {\ldots}    -0.035480 -0.019336 -0.001221   
+         PSP                     0.105513    {\ldots}    -0.063503 -0.034609 -0.002186   
+         PSV                     0.081123    {\ldots}    -0.037070 -0.020203 -0.001276   
+         SAT                     0.063563    {\ldots}    -0.023411 -0.012759 -0.000806   
+         SCD                     0.014062    {\ldots}    -0.004338 -0.002364 -0.000149   
+         SNES                    0.103913    {\ldots}    -0.027572 -0.015027 -0.000949   
+         TG16                    0.010756    {\ldots}    -0.002504 -0.001365 -0.000086   
+         WS                      0.020917    {\ldots}    -0.004338 -0.002364 -0.000149   
+         Wii                     0.353762    {\ldots}    -0.066135 -0.036043 -0.002276   
+         WiiU                    0.126700    {\ldots}    -0.021563 -0.011751 -0.000742   
+         X360                    0.413718    {\ldots}    -0.064616 -0.035215 -0.002224   
+         XB                      0.356487    {\ldots}     1.000000 -0.028037  0.034416   
+         XOne                    0.209052    {\ldots}    -0.028037  1.000000 -0.000965   
+         AO                      0.012269    {\ldots}     0.034416 -0.000965  1.000000   
+         E                      -0.229025    {\ldots}    -0.109102 -0.055407 -0.010494   
+         E10+                    0.042961    {\ldots}    -0.037657  0.018020 -0.002377   
+         EC                     -0.005860    {\ldots}    -0.005009 -0.002730 -0.000172   
+         K-A                    -0.003521    {\ldots}    -0.003067 -0.001671 -0.000106   
+         M                       0.159516    {\ldots}     0.076465  0.080557 -0.002508   
+         RP                     -0.002654    {\ldots}    -0.001771 -0.000965 -0.000061   
+         T                       0.134540    {\ldots}     0.105779 -0.004859 -0.003619   
+         
+                                 E      E10+        EC       K-A         M        RP  \textbackslash{}
+         Year\_of\_Release -0.204851  0.150476  0.008500 -0.022586  0.126955  0.005992   
+         NA\_Sales        -0.046121 -0.006005 -0.001966  0.009726  0.086100 -0.002518   
+         EU\_Sales        -0.058238 -0.008675 -0.005761 -0.001495  0.105445 -0.001786   
+         JP\_Sales         0.083270 -0.048688 -0.005577  0.017718 -0.038436 -0.001971   
+         Other\_Sales     -0.082818  0.006403 -0.003982 -0.002708  0.114313 -0.001563   
+         Global\_Sales    -0.036509 -0.014938 -0.004450  0.007857  0.085563 -0.002536   
+         Critic\_Score    -0.569374  0.161750 -0.020685 -0.001091  0.309860  0.006415   
+         User\_Score      -0.592969  0.149437 -0.014154  0.018054  0.323843  0.007532   
+         Genre\_Labels     0.101060 -0.079145 -0.016352  0.012281 -0.064598  0.012618   
+         Platform\_Labels -0.229025  0.042961 -0.005860 -0.003521  0.159516 -0.002654   
+         Rating\_Labels   -0.862048 -0.067032  0.004439  0.008412  0.335226  0.011431   
+         Action          -0.177146  0.102151 -0.004209 -0.006791  0.149486 -0.003921   
+         Adventure        0.084534 -0.034576  0.014055 -0.003951 -0.017737 -0.002281   
+         Fighting        -0.072792 -0.051718 -0.005119 -0.003134 -0.028846 -0.001810   
+         Misc             0.080015  0.015771  0.037831  0.010211 -0.100190 -0.002651   
+         Platform.1       0.059793  0.064588 -0.005250 -0.003215 -0.073605 -0.001856   
+         Puzzle           0.104799 -0.007523 -0.004185 -0.002562 -0.060896 -0.001479   
+         Racing           0.075695 -0.007465 -0.006272 -0.003840 -0.076933 -0.002217   
+         Role-Playing    -0.070814 -0.011219 -0.006955 -0.004258  0.016350 -0.002458   
+         Shooter         -0.229936 -0.043777 -0.006466 -0.003959  0.334882 -0.002286   
+         Simulation       0.037924 -0.025087 -0.005174 -0.003168 -0.070575 -0.001829   
+         Sports           0.185048 -0.057078 -0.008929 -0.005467 -0.120289 -0.003156   
+         Strategy        -0.015173  0.020921 -0.004563  0.042695 -0.040003  0.037779   
+         2600             0.062757 -0.025695 -0.001863 -0.001141 -0.027111 -0.000659   
+         3DO              0.010058 -0.004118 -0.000299 -0.000183 -0.004345 -0.000106   
+         3DS              0.036137  0.038410 -0.003963 -0.002426 -0.043222 -0.001401   
+         DC               0.017031 -0.017170 -0.001245 -0.000762 -0.014394 -0.000440   
+         DS               0.138634  0.048212  0.007950 -0.005209 -0.117555 -0.003007   
+         GB               0.057354 -0.023483 -0.001703 -0.001043 -0.024777 -0.000602   
+         GBA              0.110219 -0.043731 -0.004953 -0.003033 -0.065210 -0.001751   
+         {\ldots}                   {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+         GG               0.005806 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         N64              0.104222 -0.042672 -0.003094 -0.001895 -0.045023 -0.001094   
+         NES              0.057651 -0.023604 -0.001712 -0.001048 -0.024905 -0.000605   
+         NG               0.020121 -0.008238 -0.000597 -0.000366 -0.008692 -0.000211   
+         PC              -0.152896 -0.006363  0.018138  0.035207  0.143105  0.031457   
+         PCFX             0.005806 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         PS               0.164308 -0.085152 -0.006175  0.013599 -0.074517 -0.002183   
+         PS2             -0.059613 -0.036149 -0.000302 -0.005218  0.014285 -0.003012   
+         PS3             -0.123083  0.021933 -0.006493 -0.003976  0.106497 -0.002295   
+         PS4             -0.051139  0.009634 -0.003454 -0.002115  0.053862 -0.001221   
+         PSP              0.036241  0.000625 -0.006183 -0.003786 -0.050484 -0.002186   
+         PSV              0.019262 -0.011320 -0.003609 -0.002210 -0.009151 -0.001276   
+         SAT              0.076775 -0.031434 -0.002279 -0.001396 -0.033166 -0.000806   
+         SCD              0.014225 -0.005824 -0.000422 -0.000259 -0.006145 -0.000149   
+         SNES             0.090423 -0.037022 -0.002685 -0.001644 -0.039062 -0.000949   
+         TG16             0.008212 -0.003362 -0.000244 -0.000149 -0.003547 -0.000086   
+         WS               0.014225 -0.005824 -0.000422 -0.000259 -0.006145 -0.000149   
+         Wii             -0.012274  0.101570  0.014105 -0.003943 -0.068004 -0.002276   
+         WiiU            -0.023820  0.068508 -0.002099 -0.001285  0.002758 -0.000742   
+         X360            -0.168117  0.050140 -0.006291 -0.003852  0.137109 -0.002224   
+         XB              -0.109102 -0.037657 -0.005009 -0.003067  0.076465 -0.001771   
+         XOne            -0.055407  0.018020 -0.002730 -0.001671  0.080557 -0.000965   
+         AO              -0.010494 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         E                1.000000 -0.409431 -0.029689 -0.018178 -0.431995 -0.010494   
+         E10+            -0.409431  1.000000 -0.006726 -0.004118 -0.097861 -0.002377   
+         EC              -0.029689 -0.006726  1.000000 -0.000299 -0.007096 -0.000172   
+         K-A             -0.018178 -0.004118 -0.000299  1.000000 -0.004345 -0.000106   
+         M               -0.431995 -0.097861 -0.007096 -0.004345  1.000000 -0.002508   
+         RP              -0.010494 -0.002377 -0.000172 -0.000106 -0.002508  1.000000   
+         T               -0.623345 -0.141208 -0.010239 -0.006269 -0.148989 -0.003619   
+         
+                                 T  
+         Year\_of\_Release  0.050496  
+         NA\_Sales        -0.003826  
+         EU\_Sales        -0.000786  
+         JP\_Sales        -0.039824  
+         Other\_Sales      0.012325  
+         Global\_Sales    -0.008694  
+         Critic\_Score     0.360702  
+         User\_Score       0.387584  
+         Genre\_Labels    -0.019252  
+         Platform\_Labels  0.134540  
+         Rating\_Labels    0.874224  
+         Action           0.033847  
+         Adventure       -0.067869  
+         Fighting         0.151609  
+         Misc            -0.037899  
+         Platform.1      -0.065531  
+         Puzzle          -0.079142  
+         Racing          -0.030228  
+         Role-Playing     0.085229  
+         Shooter          0.065527  
+         Simulation       0.025082  
+         Sports          -0.097877  
+         Strategy         0.032304  
+         2600            -0.039119  
+         3DO             -0.006269  
+         3DS             -0.040038  
+         DC               0.002270  
+         DS              -0.119606  
+         GB              -0.035752  
+         GBA             -0.056136  
+         {\ldots}                   {\ldots}  
+         GG              -0.003619  
+         N64             -0.064966  
+         NES             -0.035936  
+         NG              -0.012542  
+         PC               0.084389  
+         PCFX            -0.003619  
+         PS              -0.087158  
+         PS2              0.090627  
+         PS3              0.057764  
+         PS4              0.016352  
+         PSP             -0.006822  
+         PSV             -0.008581  
+         SAT             -0.047857  
+         SCD             -0.008867  
+         SNES            -0.056365  
+         TG16            -0.005119  
+         WS              -0.008867  
+         Wii             -0.007456  
+         WiiU            -0.022049  
+         X360             0.070292  
+         XB               0.105779  
+         XOne            -0.004859  
+         AO              -0.003619  
+         E               -0.623345  
+         E10+            -0.141208  
+         EC              -0.010239  
+         K-A             -0.006269  
+         M               -0.148989  
+         RP              -0.003619  
+         T                1.000000  
+         
+         [62 rows x 62 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{df\PYZus{}LR} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NA\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EU\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{classes\PYZus{}LR} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{df\PYZus{}LR}\PY{p}{)}
+         \PY{n}{classes\PYZus{}LR}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+       NA_Sales  EU_Sales
+0      1.000000  1.000000
+1      0.703095  0.123619
+2      0.379110  0.440608
+3      0.377418  0.377417
+4      0.272485  0.306975
+5      0.560928  0.078039
+6      0.272727  0.315608
+7      0.337524  0.316989
+8      0.349130  0.239641
+9      0.651112  0.021754
+10     0.218810  0.378108
+11     0.234768  0.257942
+12     0.217602  0.213398
+13     0.215667  0.277279
+14     0.362669  0.168854
+15     0.217843  0.293163
+16     0.169729  0.313881
+17     0.227998  0.013812
+18     0.308994  0.129489
+19     0.114603  0.317680
+20     0.154255  0.154006
+21     0.261847  0.093577
+22     0.230658  0.118785
+23     0.233559  0.177486
+24     0.203337  0.189572
+25     0.146518  0.134669
+26     0.082930  0.184738
+27     0.133221  0.109461
+28     0.165619  0.175760
+29     0.218569  0.146409
+...         ...       ...
+16382  0.000000  0.000000
+16383  0.000000  0.000000
+16384  0.000000  0.000000
+16385  0.000242  0.000000
+16386  0.000000  0.000000
+16387  0.000000  0.000345
+16388  0.000000  0.000000
+16389  0.000000  0.000345
+16390  0.000242  0.000000
+16391  0.000242  0.000000
+16392  0.000242  0.000000
+16393  0.000242  0.000000
+16394  0.000242  0.000000
+16395  0.000242  0.000000
+16396  0.000000  0.000000
+16397  0.000000  0.000000
+16398  0.000000  0.000000
+16399  0.000000  0.000345
+16400  0.000000  0.000000
+16401  0.000242  0.000000
+16402  0.000000  0.000345
+16403  0.000242  0.000000
+16404  0.000000  0.000000
+16405  0.000242  0.000000
+16406  0.000000  0.000000
+16407  0.000000  0.000000
+16408  0.000000  0.000345
+16409  0.000000  0.000000
+16410  0.000242  0.000000
+16411  0.000000  0.000000
+
+[16412 rows x 2 columns]
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:} 0        0.799432
+         1        0.072848
+         2        0.311258
+         3        0.279092
+         4        0.094607
+         5        0.054872
+         6        0.272469
+         7        0.268685
+         8        0.211921
+         9        0.044465
+         10       0.259224
+         11       0.179754
+         12       0.067171
+         13       0.203406
+         14       0.159886
+         15       0.167455
+         16       0.374645
+         17       1.000000
+         18       0.052034
+         19       0.192999
+         20       0.128666
+         21       0.039735
+         22       0.043519
+         23       0.133396
+         24       0.168401
+         25       0.047304
+         26       0.111637
+         27       0.075686
+         28       0.109745
+         29       0.124882
+                    {\ldots}   
+         16382    0.000000
+         16383    0.000000
+         16384    0.000000
+         16385    0.000000
+         16386    0.000000
+         16387    0.000000
+         16388    0.000000
+         16389    0.000000
+         16390    0.000000
+         16391    0.000000
+         16392    0.000000
+         16393    0.000000
+         16394    0.000000
+         16395    0.000000
+         16396    0.000000
+         16397    0.000000
+         16398    0.000000
+         16399    0.000000
+         16400    0.000000
+         16401    0.000000
+         16402    0.000000
+         16403    0.000000
+         16404    0.000000
+         16405    0.000000
+         16406    0.000000
+         16407    0.000000
+         16408    0.000000
+         16409    0.000000
+         16410    0.000000
+         16411    0.000000
+         Name: Other\_Sales, Length: 16412, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{x\PYZus{}treino}\PY{p}{,} \PY{n}{x\PYZus{}teste}\PY{p}{,} \PY{n}{y\PYZus{}treino}\PY{p}{,} \PY{n}{y\PYZus{}teste} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df\PYZus{}LR}\PY{p}{,}\PY{n}{classes\PYZus{}LR}\PY{p}{,}\PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}treino}\PY{p}{,} \PY{n}{y\PYZus{}treino}\PY{p}{)}
+         \PY{n}{score\PYZus{}regressao} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{x\PYZus{}teste}\PY{p}{,} \PY{n}{y\PYZus{}teste}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Porcentagem de acerto da regressão linear: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{score\PYZus{}regressao}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Porcentagem de acerto da regressão linear: 77.42844309822372\%
+
+    \end{Verbatim}
+
+    \subsubsection{Hipótese:}\label{hipuxf3tese}
+
+\paragraph{É possível prever o número de vendas em outras regiões do
+mundo baseado nas vendas da América do Norte, Europa e
+Japão?}\label{uxe9-possuxedvel-prever-o-nuxfamero-de-vendas-em-outras-regiuxf5es-do-mundo-baseado-nas-vendas-da-amuxe9rica-do-norte-europa-e-japuxe3o}
+
+    A correlação entre as vendas das regiões da América do Norte e Europa
+com as vendas de outros lugares do mundo são bem fortes, o que implica
+serem valores relevantes entre eles. Através da execução da Regressão
+Linear, observamos que a chance de acerto foi de 77\% aproximadamente,
+confirmando a hipótese de que é possível prever o número de vendas de um
+jogo em outras regioes, a partir das vendas desse jogo na América do
+Norte e na Europa.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{display}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Strategy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AO}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+17
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+28
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+-----------------------
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+60
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+67
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} Index(['Name', 'Platform', 'Year\_of\_Release', 'Genre', 'Publisher', 'NA\_Sales',
+                'EU\_Sales', 'JP\_Sales', 'Other\_Sales', 'Global\_Sales', 'Critic\_Score',
+                'User\_Score', 'Developer', 'Rating', 'Genre\_Labels', 'Platform\_Labels',
+                'Rating\_Labels', 'Action', 'Adventure', 'Fighting', 'Misc',
+                'Platform.1', 'Puzzle', 'Racing', 'Role-Playing', 'Shooter',
+                'Simulation', 'Sports', 'Strategy', '2600', '3DO', '3DS', 'DC', 'DS',
+                'GB', 'GBA', 'GC', 'GEN', 'GG', 'N64', 'NES', 'NG', 'PC', 'PCFX', 'PS',
+                'PS2', 'PS3', 'PS4', 'PSP', 'PSV', 'SAT', 'SCD', 'SNES', 'TG16', 'WS',
+                'Wii', 'WiiU', 'X360', 'XB', 'XOne', 'AO', 'E', 'E10+', 'EC', 'K-A',
+                'M', 'RP', 'T'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{first} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Action}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Strategy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{second} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AO}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df\PYZus{}RNA} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{first}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}\PY{n}{second}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{classes\PYZus{}RNA} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global\PYZus{}Sales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{df\PYZus{}RNA}\PY{p}{)}
+         \PY{n}{classes\PYZus{}RNA}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+       Action  Adventure  Fighting  Misc  Platform.1  Puzzle  Racing  \
+0         0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+1         0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+2         0.0        0.0       0.0   0.0         0.0     0.0     1.0   
+3         0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+4         0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+5         0.0        0.0       0.0   0.0         0.0     1.0     0.0   
+6         0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+7         0.0        0.0       0.0   1.0         0.0     0.0     0.0   
+8         0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+9         0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+10        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+11        0.0        0.0       0.0   0.0         0.0     0.0     1.0   
+12        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+13        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+14        0.0        0.0       0.0   1.0         0.0     0.0     0.0   
+15        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16        1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+17        1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+18        0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+19        0.0        0.0       0.0   1.0         0.0     0.0     0.0   
+20        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+21        0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+22        0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+23        1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+24        1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+25        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+26        0.0        0.0       0.0   0.0         0.0     1.0     0.0   
+27        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+28        0.0        0.0       0.0   0.0         0.0     0.0     1.0   
+29        0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+...       ...        ...       ...   ...         ...     ...     ...   
+16382     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16383     0.0        0.0       0.0   0.0         0.0     0.0     1.0   
+16384     0.0        1.0       0.0   0.0         0.0     0.0     0.0   
+16385     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16386     0.0        1.0       0.0   0.0         0.0     0.0     0.0   
+16387     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16388     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16389     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16390     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16391     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16392     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16393     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16394     0.0        0.0       0.0   0.0         0.0     1.0     0.0   
+16395     0.0        0.0       0.0   0.0         0.0     1.0     0.0   
+16396     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16397     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16398     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16399     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16400     0.0        1.0       0.0   0.0         0.0     0.0     0.0   
+16401     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16402     0.0        1.0       0.0   0.0         0.0     0.0     0.0   
+16403     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16404     0.0        0.0       0.0   1.0         0.0     0.0     0.0   
+16405     0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+16406     0.0        0.0       0.0   0.0         0.0     0.0     1.0   
+16407     1.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16408     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+16409     0.0        1.0       0.0   0.0         0.0     0.0     0.0   
+16410     0.0        0.0       0.0   0.0         1.0     0.0     0.0   
+16411     0.0        0.0       0.0   0.0         0.0     0.0     0.0   
+
+       Role-Playing  Shooter  Simulation  Sports  Strategy   AO    E  E10+  \
+0               0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+1               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+2               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+3               0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+4               1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+5               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+6               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+7               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+8               0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+9               0.0      1.0         0.0     0.0       0.0  0.0  1.0   0.0   
+10              0.0      0.0         1.0     0.0       0.0  0.0  1.0   0.0   
+11              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+12              1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+13              0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+14              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+15              0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+16              0.0      0.0         0.0     0.0       0.0  0.0  0.0   0.0   
+17              0.0      0.0         0.0     0.0       0.0  0.0  0.0   0.0   
+18              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+19              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+20              1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+21              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+22              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+23              0.0      0.0         0.0     0.0       0.0  0.0  0.0   0.0   
+24              0.0      0.0         0.0     0.0       0.0  0.0  0.0   0.0   
+25              1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+26              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+27              1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+28              0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+29              0.0      1.0         0.0     0.0       0.0  0.0  0.0   0.0   
+...             ...      ...         ...     ...       ...  ...  ...   ...   
+16382           0.0      0.0         1.0     0.0       0.0  0.0  1.0   0.0   
+16383           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16384           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16385           0.0      0.0         0.0     1.0       0.0  0.0  0.0   0.0   
+16386           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16387           0.0      0.0         1.0     0.0       0.0  0.0  1.0   0.0   
+16388           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16389           0.0      0.0         0.0     0.0       0.0  0.0  0.0   0.0   
+16390           0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+16391           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16392           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16393           0.0      1.0         0.0     0.0       0.0  0.0  0.0   0.0   
+16394           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16395           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16396           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16397           0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+16398           1.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16399           0.0      0.0         0.0     0.0       1.0  0.0  0.0   1.0   
+16400           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16401           0.0      0.0         1.0     0.0       0.0  0.0  1.0   0.0   
+16402           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16403           0.0      1.0         0.0     0.0       0.0  0.0  0.0   0.0   
+16404           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16405           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16406           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16407           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16408           0.0      0.0         0.0     1.0       0.0  0.0  1.0   0.0   
+16409           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16410           0.0      0.0         0.0     0.0       0.0  0.0  1.0   0.0   
+16411           0.0      0.0         1.0     0.0       0.0  0.0  1.0   0.0   
+
+        EC  K-A    M   RP    T  
+0      0.0  0.0  0.0  0.0  0.0  
+1      0.0  0.0  0.0  0.0  0.0  
+2      0.0  0.0  0.0  0.0  0.0  
+3      0.0  0.0  0.0  0.0  0.0  
+4      0.0  0.0  0.0  0.0  0.0  
+5      0.0  0.0  0.0  0.0  0.0  
+6      0.0  0.0  0.0  0.0  0.0  
+7      0.0  0.0  0.0  0.0  0.0  
+8      0.0  0.0  0.0  0.0  0.0  
+9      0.0  0.0  0.0  0.0  0.0  
+10     0.0  0.0  0.0  0.0  0.0  
+11     0.0  0.0  0.0  0.0  0.0  
+12     0.0  0.0  0.0  0.0  0.0  
+13     0.0  0.0  0.0  0.0  0.0  
+14     0.0  0.0  0.0  0.0  0.0  
+15     0.0  0.0  0.0  0.0  0.0  
+16     0.0  0.0  1.0  0.0  0.0  
+17     0.0  0.0  1.0  0.0  0.0  
+18     0.0  0.0  0.0  0.0  0.0  
+19     0.0  0.0  0.0  0.0  0.0  
+20     0.0  0.0  0.0  0.0  0.0  
+21     0.0  0.0  0.0  0.0  0.0  
+22     0.0  0.0  0.0  0.0  0.0  
+23     0.0  0.0  1.0  0.0  0.0  
+24     0.0  0.0  1.0  0.0  0.0  
+25     0.0  0.0  0.0  0.0  0.0  
+26     0.0  0.0  0.0  0.0  0.0  
+27     0.0  0.0  0.0  0.0  0.0  
+28     0.0  0.0  0.0  0.0  0.0  
+29     0.0  0.0  1.0  0.0  0.0  
+...    ...  ...  ...  ...  ...  
+16382  0.0  0.0  0.0  0.0  0.0  
+16383  0.0  0.0  0.0  0.0  0.0  
+16384  0.0  0.0  0.0  0.0  0.0  
+16385  0.0  0.0  0.0  0.0  1.0  
+16386  0.0  0.0  0.0  0.0  0.0  
+16387  0.0  0.0  0.0  0.0  0.0  
+16388  0.0  0.0  0.0  0.0  0.0  
+16389  0.0  0.0  1.0  0.0  0.0  
+16390  0.0  0.0  0.0  0.0  0.0  
+16391  0.0  0.0  0.0  0.0  0.0  
+16392  0.0  0.0  0.0  0.0  0.0  
+16393  0.0  0.0  0.0  0.0  1.0  
+16394  0.0  0.0  0.0  0.0  0.0  
+16395  0.0  0.0  0.0  0.0  0.0  
+16396  0.0  0.0  0.0  0.0  0.0  
+16397  0.0  0.0  0.0  0.0  0.0  
+16398  0.0  0.0  0.0  0.0  0.0  
+16399  0.0  0.0  0.0  0.0  0.0  
+16400  0.0  0.0  0.0  0.0  0.0  
+16401  0.0  0.0  0.0  0.0  0.0  
+16402  0.0  0.0  0.0  0.0  0.0  
+16403  0.0  0.0  0.0  0.0  1.0  
+16404  0.0  0.0  0.0  0.0  0.0  
+16405  0.0  0.0  0.0  0.0  0.0  
+16406  0.0  0.0  0.0  0.0  0.0  
+16407  0.0  0.0  0.0  0.0  0.0  
+16408  0.0  0.0  0.0  0.0  0.0  
+16409  0.0  0.0  0.0  0.0  0.0  
+16410  0.0  0.0  0.0  0.0  0.0  
+16411  0.0  0.0  0.0  0.0  0.0  
+
+[16412 rows x 20 columns]
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:} 0        1.000000
+         1        0.487580
+         2        0.430389
+         3        0.397068
+         4        0.380104
+         5        0.366655
+         6        0.361081
+         7        0.350418
+         8        0.343148
+         9        0.343027
+         10       0.298922
+         11       0.281231
+         12       0.279898
+         13       0.275051
+         14       0.264268
+         15       0.264025
+         16       0.254938
+         17       0.252151
+         18       0.249727
+         19       0.244154
+         20       0.221132
+         21       0.219799
+         22       0.209378
+         23       0.197140
+         24       0.195686
+         25       0.192051
+         26       0.185266
+         27       0.183448
+         28       0.181510
+         29       0.178481
+                    {\ldots}   
+         16382    0.000121
+         16383    0.000121
+         16384    0.000121
+         16385    0.000121
+         16386    0.000121
+         16387    0.000121
+         16388    0.000121
+         16389    0.000121
+         16390    0.000121
+         16391    0.000121
+         16392    0.000121
+         16393    0.000121
+         16394    0.000121
+         16395    0.000121
+         16396    0.000121
+         16397    0.000121
+         16398    0.000121
+         16399    0.000121
+         16400    0.000121
+         16401    0.000121
+         16402    0.000121
+         16403    0.000121
+         16404    0.000121
+         16405    0.000121
+         16406    0.000121
+         16407    0.000121
+         16408    0.000121
+         16409    0.000121
+         16410    0.000121
+         16411    0.000121
+         Name: Global\_Sales, Length: 16412, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:}                  Year\_of\_Release  NA\_Sales  EU\_Sales  JP\_Sales  Other\_Sales  \textbackslash{}
+         Year\_of\_Release         1.000000 -0.092284  0.004059 -0.168594     0.037807   
+         NA\_Sales               -0.092284  1.000000  0.766537  0.451171     0.638497   
+         EU\_Sales                0.004059  0.766537  1.000000  0.435870     0.722675   
+         JP\_Sales               -0.168594  0.451171  0.435870  1.000000     0.291481   
+         Other\_Sales             0.037807  0.638497  0.722675  0.291481     1.000000   
+         Global\_Sales           -0.076242  0.941238  0.901664  0.613301     0.748904   
+         Critic\_Score            0.113911  0.153352  0.170540 -0.043449     0.175807   
+         User\_Score              0.142948  0.139266  0.152137 -0.032089     0.164654   
+         Genre\_Labels           -0.130105  0.020071  0.019748  0.031198     0.011930   
+         Platform\_Labels         0.171548  0.041374  0.044551 -0.080995     0.054400   
+         Rating\_Labels           0.128514  0.037904  0.049772 -0.062798     0.068568   
+         Action                  0.133094 -0.001892  0.008413 -0.048716     0.019852   
+         Adventure               0.088165 -0.066224 -0.055972 -0.035837    -0.054349   
+         Fighting               -0.072302 -0.000205 -0.012702  0.019088    -0.005944   
+         Misc                    0.051035 -0.013266 -0.015518 -0.016985    -0.008416   
+         Platform.1             -0.106335  0.070246  0.037982  0.053625     0.013162   
+         Puzzle                 -0.040517 -0.011868 -0.021890  0.012766    -0.026249   
+         Racing                 -0.078625  0.009410  0.025391 -0.029561     0.021071   
+         Role-Playing            0.033768 -0.015890 -0.011777  0.161811    -0.012662   
+         Shooter                -0.022610  0.066877  0.055779 -0.045883     0.049871   
+         Simulation              0.005879 -0.015141 -0.006260 -0.003099    -0.014797   
+         Sports                 -0.067681  0.013273  0.011925 -0.026133     0.020741   
+         Strategy               -0.030824 -0.041231 -0.032416 -0.003500    -0.034823   
+         2600                   -0.349437  0.044519 -0.017329 -0.021308    -0.018131   
+         3DO                    -0.027186 -0.004361 -0.003894 -0.001967    -0.003426   
+         3DS                     0.202669 -0.022511 -0.009341  0.067938    -0.020753   
+         DC                     -0.062763 -0.010996 -0.012624  0.015567    -0.012730   
+         DS                      0.111278 -0.039917 -0.043478  0.004800    -0.040628   
+         GB                     -0.138086  0.085417  0.052257  0.197831     0.014933   
+         GBA                    -0.126333 -0.010177 -0.023810 -0.013975    -0.045441   
+         {\ldots}                          {\ldots}       {\ldots}       {\ldots}       {\ldots}          {\ldots}   
+         GG                     -0.019236 -0.002518 -0.002248 -0.000969    -0.001978   
+         N64                    -0.189604  0.030006 -0.004483  0.012688    -0.025347   
+         NES                    -0.254889  0.096603  0.010659  0.230991     0.002679   
+         NG                     -0.055154 -0.008724 -0.007791  0.003593    -0.006854   
+         PC                      0.102076 -0.050349  0.000525 -0.062528    -0.032569   
+         PCFX                   -0.013925 -0.002518 -0.002248 -0.001219    -0.001978   
+         PS                     -0.403360  0.005837  0.017867  0.034862    -0.020040   
+         PS2                    -0.124919  0.002440  0.007848 -0.017318     0.085856   
+         PS3                     0.217741  0.012401  0.060569 -0.016841     0.086527   
+         PS4                     0.230376  0.002525  0.065959 -0.019052     0.062897   
+         PSP                     0.106897 -0.059565 -0.050271 -0.013518    -0.020108   
+         PSV                     0.212312 -0.046886 -0.037208 -0.014467    -0.028334   
+         SAT                    -0.183610 -0.032765 -0.029091  0.035746    -0.025931   
+         SCD                    -0.041161 -0.002277 -0.003245 -0.000223    -0.003999   
+         SNES                   -0.261404 -0.001185 -0.015916  0.159685    -0.022099   
+         TG16                   -0.021571 -0.003561 -0.003180  0.000048    -0.002797   
+         WS                     -0.021102 -0.006168 -0.005508  0.009706    -0.004846   
+         Wii                     0.122971  0.040730  0.031506 -0.023919     0.019752   
+         WiiU                    0.115987 -0.000580  0.004664  0.003012    -0.003640   
+         X360                    0.164444  0.076301  0.040287 -0.062814     0.032120   
+         XB                     -0.109984 -0.010371 -0.032103 -0.056030    -0.044743   
+         XOne                    0.177969  0.017027  0.015305 -0.030672     0.006630   
+         AO                     -0.001975  0.009490  0.007140 -0.001971     0.001756   
+         E                      -0.204851 -0.046121 -0.058238  0.083270    -0.082818   
+         E10+                    0.150476 -0.006005 -0.008675 -0.048688     0.006403   
+         EC                      0.008500 -0.001966 -0.005761 -0.005577    -0.003982   
+         K-A                    -0.022586  0.009726 -0.001495  0.017718    -0.002708   
+         M                       0.126955  0.086100  0.105445 -0.038436     0.114313   
+         RP                      0.005992 -0.002518 -0.001786 -0.001971    -0.001563   
+         T                       0.050496 -0.003826 -0.000786 -0.039824     0.012325   
+         
+                          Global\_Sales  Critic\_Score  User\_Score  Genre\_Labels  \textbackslash{}
+         Year\_of\_Release     -0.076242      0.113911    0.142948     -0.130105   
+         NA\_Sales             0.941238      0.153352    0.139266      0.020071   
+         EU\_Sales             0.901664      0.170540    0.152137      0.019748   
+         JP\_Sales             0.613301     -0.043449   -0.032089      0.031198   
+         Other\_Sales          0.748904      0.175807    0.164654      0.011930   
+         Global\_Sales         1.000000      0.148500    0.135987      0.024624   
+         Critic\_Score         0.148500      1.000000    0.818206      0.069877   
+         User\_Score           0.135987      0.818206    1.000000      0.046055   
+         Genre\_Labels         0.024624      0.069877    0.046055      1.000000   
+         Platform\_Labels      0.026568      0.169235    0.200057      0.023719   
+         Rating\_Labels        0.031828      0.518467    0.550275     -0.059398   
+         Action              -0.005561      0.052922    0.080912     -0.655339   
+         Adventure           -0.066707     -0.141741   -0.126063     -0.303662   
+         Fighting            -0.001187     -0.000611    0.012766     -0.179352   
+         Misc                -0.016393     -0.128596   -0.139842     -0.172548   
+         Platform.1           0.061538      0.029614    0.018569     -0.057659   
+         Puzzle              -0.013903     -0.040003   -0.085862      0.004367   
+         Racing               0.009822      0.053052    0.028890      0.081969   
+         Role-Playing         0.018515      0.020261    0.047309      0.174538   
+         Shooter              0.050127      0.134708    0.133745      0.240032   
+         Simulation          -0.012400     -0.036616   -0.026477      0.254281   
+         Sports               0.008147      0.031762    0.002053      0.546200   
+         Strategy            -0.037065     -0.010627    0.003714      0.334003   
+         2600                 0.011329     -0.079027   -0.074083     -0.032245   
+         3DO                 -0.004364     -0.012665   -0.011873      0.000312   
+         3DS                 -0.003804     -0.059022   -0.046272     -0.063626   
+         DC                  -0.008301     -0.015796   -0.014420     -0.004460   
+         DS                  -0.039022     -0.132093   -0.161279     -0.024214   
+         GB                   0.103108     -0.072224   -0.067706      0.016554   
+         GBA                 -0.021276      0.020456   -0.048069     -0.023931   
+         {\ldots}                       {\ldots}           {\ldots}         {\ldots}           {\ldots}   
+         GG                  -0.002486     -0.007312   -0.006854     -0.001893   
+         N64                  0.013807     -0.131242   -0.123032      0.035965   
+         NES                  0.100614     -0.072597   -0.068056      0.002626   
+         NG                  -0.007227     -0.025337   -0.023752     -0.016139   
+         PC                  -0.042581      0.153374    0.158269      0.100278   
+         PCFX                -0.002536     -0.007312   -0.006854      0.004326   
+         PS                   0.013344     -0.169873   -0.165945      0.057547   
+         PS2                  0.010658      0.082215    0.118569      0.023297   
+         PS3                  0.033203      0.080639    0.094829     -0.027007   
+         PS4                  0.026541      0.055835    0.050208     -0.039210   
+         PSP                 -0.052749     -0.060512   -0.053442     -0.039607   
+         PSV                 -0.043041     -0.063162   -0.035472     -0.082027   
+         SAT                 -0.022671     -0.096679   -0.090631      0.014579   
+         SCD                 -0.002760     -0.017913   -0.016792      0.003826   
+         SNES                 0.023394     -0.113865   -0.106742      0.043190   
+         TG16                -0.003233     -0.010341   -0.009694     -0.001212   
+         WS                  -0.003679     -0.017913   -0.016792      0.017370   
+         Wii                  0.029271     -0.047442   -0.029136      0.001179   
+         WiiU                 0.001346      0.025871    0.037531     -0.049163   
+         X360                 0.044473      0.129497    0.145499      0.004415   
+         XB                  -0.032405      0.176701    0.129764      0.039507   
+         XOne                 0.008612      0.057322    0.052440     -0.018284   
+         AO                   0.007071      0.012952    0.011340     -0.010185   
+         E                   -0.036509     -0.569374   -0.592969      0.101060   
+         E10+                -0.014938      0.161750    0.149437     -0.079145   
+         EC                  -0.004450     -0.020685   -0.014154     -0.016352   
+         K-A                  0.007857     -0.001091    0.018054      0.012281   
+         M                    0.085563      0.309860    0.323843     -0.064598   
+         RP                  -0.002536      0.006415    0.007532      0.012618   
+         T                   -0.008694      0.360702    0.387584     -0.019252   
+         
+                          Platform\_Labels    {\ldots}           XB      XOne        AO  \textbackslash{}
+         Year\_of\_Release         0.171548    {\ldots}    -0.109984  0.177969 -0.001975   
+         NA\_Sales                0.041374    {\ldots}    -0.010371  0.017027  0.009490   
+         EU\_Sales                0.044551    {\ldots}    -0.032103  0.015305  0.007140   
+         JP\_Sales               -0.080995    {\ldots}    -0.056030 -0.030672 -0.001971   
+         Other\_Sales             0.054400    {\ldots}    -0.044743  0.006630  0.001756   
+         Global\_Sales            0.026568    {\ldots}    -0.032405  0.008612  0.007071   
+         Critic\_Score            0.169235    {\ldots}     0.176701  0.057322  0.012952   
+         User\_Score              0.200057    {\ldots}     0.129764  0.052440  0.011340   
+         Genre\_Labels            0.023719    {\ldots}     0.039507 -0.018284 -0.010185   
+         Platform\_Labels         1.000000    {\ldots}     0.356487  0.209052  0.012269   
+         Rating\_Labels           0.212778    {\ldots}     0.134803  0.036860 -0.008293   
+         Action                  0.025635    {\ldots}    -0.006870  0.043978  0.015542   
+         Adventure              -0.026047    {\ldots}    -0.038995 -0.010093 -0.002281   
+         Fighting                0.031767    {\ldots}     0.003913 -0.012732 -0.001810   
+         Misc                   -0.016369    {\ldots}    -0.035280 -0.010749 -0.002651   
+         Platform.1             -0.065962    {\ldots}     0.007584 -0.018268 -0.001856   
+         Puzzle                 -0.121153    {\ldots}    -0.032176 -0.023426 -0.001479   
+         Racing                  0.047611    {\ldots}     0.066704  0.002978 -0.002217   
+         Role-Playing           -0.042634    {\ldots}    -0.048760 -0.014478 -0.002458   
+         Shooter                 0.092801    {\ldots}     0.063459  0.034321 -0.002286   
+         Simulation             -0.084489    {\ldots}    -0.022617 -0.019948 -0.001829   
+         Sports                  0.087240    {\ldots}     0.043219  0.004745 -0.003156   
+         Strategy               -0.025956    {\ldots}    -0.016933 -0.017965 -0.001613   
+         2600                   -0.159743    {\ldots}    -0.019136 -0.010429 -0.000659   
+         3DO                    -0.023985    {\ldots}    -0.003067 -0.001671 -0.000106   
+         3DS                    -0.296875    {\ldots}    -0.040701 -0.022182 -0.001401   
+         DC                     -0.086535    {\ldots}    -0.012787 -0.006969 -0.000440   
+         DS                     -0.545285    {\ldots}    -0.087379 -0.047621 -0.003007   
+         GB                     -0.099925    {\ldots}    -0.017489 -0.009531 -0.000602   
+         GBA                    -0.263852    {\ldots}    -0.050870 -0.027723 -0.001751   
+         {\ldots}                          {\ldots}    {\ldots}          {\ldots}       {\ldots}       {\ldots}   
+         GG                     -0.006385    {\ldots}    -0.001771 -0.000965 -0.000061   
+         N64                    -0.097871    {\ldots}    -0.031780 -0.017320 -0.001094   
+         NES                    -0.044877    {\ldots}    -0.017579 -0.009581 -0.000605   
+         NG                     -0.012430    {\ldots}    -0.006135 -0.003344 -0.000211   
+         PC                     -0.084384    {\ldots}    -0.056284 -0.030674 -0.001937   
+         PCFX                   -0.001722    {\ldots}    -0.001771 -0.000965 -0.000061   
+         PS                     -0.028262    {\ldots}    -0.063417 -0.034562 -0.002183   
+         PS2                     0.007102    {\ldots}    -0.087521 -0.047698 -0.003012   
+         PS3                     0.040544    {\ldots}    -0.066691 -0.036346 -0.002295   
+         PS4                     0.040260    {\ldots}    -0.035480 -0.019336 -0.001221   
+         PSP                     0.105513    {\ldots}    -0.063503 -0.034609 -0.002186   
+         PSV                     0.081123    {\ldots}    -0.037070 -0.020203 -0.001276   
+         SAT                     0.063563    {\ldots}    -0.023411 -0.012759 -0.000806   
+         SCD                     0.014062    {\ldots}    -0.004338 -0.002364 -0.000149   
+         SNES                    0.103913    {\ldots}    -0.027572 -0.015027 -0.000949   
+         TG16                    0.010756    {\ldots}    -0.002504 -0.001365 -0.000086   
+         WS                      0.020917    {\ldots}    -0.004338 -0.002364 -0.000149   
+         Wii                     0.353762    {\ldots}    -0.066135 -0.036043 -0.002276   
+         WiiU                    0.126700    {\ldots}    -0.021563 -0.011751 -0.000742   
+         X360                    0.413718    {\ldots}    -0.064616 -0.035215 -0.002224   
+         XB                      0.356487    {\ldots}     1.000000 -0.028037  0.034416   
+         XOne                    0.209052    {\ldots}    -0.028037  1.000000 -0.000965   
+         AO                      0.012269    {\ldots}     0.034416 -0.000965  1.000000   
+         E                      -0.229025    {\ldots}    -0.109102 -0.055407 -0.010494   
+         E10+                    0.042961    {\ldots}    -0.037657  0.018020 -0.002377   
+         EC                     -0.005860    {\ldots}    -0.005009 -0.002730 -0.000172   
+         K-A                    -0.003521    {\ldots}    -0.003067 -0.001671 -0.000106   
+         M                       0.159516    {\ldots}     0.076465  0.080557 -0.002508   
+         RP                     -0.002654    {\ldots}    -0.001771 -0.000965 -0.000061   
+         T                       0.134540    {\ldots}     0.105779 -0.004859 -0.003619   
+         
+                                 E      E10+        EC       K-A         M        RP  \textbackslash{}
+         Year\_of\_Release -0.204851  0.150476  0.008500 -0.022586  0.126955  0.005992   
+         NA\_Sales        -0.046121 -0.006005 -0.001966  0.009726  0.086100 -0.002518   
+         EU\_Sales        -0.058238 -0.008675 -0.005761 -0.001495  0.105445 -0.001786   
+         JP\_Sales         0.083270 -0.048688 -0.005577  0.017718 -0.038436 -0.001971   
+         Other\_Sales     -0.082818  0.006403 -0.003982 -0.002708  0.114313 -0.001563   
+         Global\_Sales    -0.036509 -0.014938 -0.004450  0.007857  0.085563 -0.002536   
+         Critic\_Score    -0.569374  0.161750 -0.020685 -0.001091  0.309860  0.006415   
+         User\_Score      -0.592969  0.149437 -0.014154  0.018054  0.323843  0.007532   
+         Genre\_Labels     0.101060 -0.079145 -0.016352  0.012281 -0.064598  0.012618   
+         Platform\_Labels -0.229025  0.042961 -0.005860 -0.003521  0.159516 -0.002654   
+         Rating\_Labels   -0.862048 -0.067032  0.004439  0.008412  0.335226  0.011431   
+         Action          -0.177146  0.102151 -0.004209 -0.006791  0.149486 -0.003921   
+         Adventure        0.084534 -0.034576  0.014055 -0.003951 -0.017737 -0.002281   
+         Fighting        -0.072792 -0.051718 -0.005119 -0.003134 -0.028846 -0.001810   
+         Misc             0.080015  0.015771  0.037831  0.010211 -0.100190 -0.002651   
+         Platform.1       0.059793  0.064588 -0.005250 -0.003215 -0.073605 -0.001856   
+         Puzzle           0.104799 -0.007523 -0.004185 -0.002562 -0.060896 -0.001479   
+         Racing           0.075695 -0.007465 -0.006272 -0.003840 -0.076933 -0.002217   
+         Role-Playing    -0.070814 -0.011219 -0.006955 -0.004258  0.016350 -0.002458   
+         Shooter         -0.229936 -0.043777 -0.006466 -0.003959  0.334882 -0.002286   
+         Simulation       0.037924 -0.025087 -0.005174 -0.003168 -0.070575 -0.001829   
+         Sports           0.185048 -0.057078 -0.008929 -0.005467 -0.120289 -0.003156   
+         Strategy        -0.015173  0.020921 -0.004563  0.042695 -0.040003  0.037779   
+         2600             0.062757 -0.025695 -0.001863 -0.001141 -0.027111 -0.000659   
+         3DO              0.010058 -0.004118 -0.000299 -0.000183 -0.004345 -0.000106   
+         3DS              0.036137  0.038410 -0.003963 -0.002426 -0.043222 -0.001401   
+         DC               0.017031 -0.017170 -0.001245 -0.000762 -0.014394 -0.000440   
+         DS               0.138634  0.048212  0.007950 -0.005209 -0.117555 -0.003007   
+         GB               0.057354 -0.023483 -0.001703 -0.001043 -0.024777 -0.000602   
+         GBA              0.110219 -0.043731 -0.004953 -0.003033 -0.065210 -0.001751   
+         {\ldots}                   {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+         GG               0.005806 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         N64              0.104222 -0.042672 -0.003094 -0.001895 -0.045023 -0.001094   
+         NES              0.057651 -0.023604 -0.001712 -0.001048 -0.024905 -0.000605   
+         NG               0.020121 -0.008238 -0.000597 -0.000366 -0.008692 -0.000211   
+         PC              -0.152896 -0.006363  0.018138  0.035207  0.143105  0.031457   
+         PCFX             0.005806 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         PS               0.164308 -0.085152 -0.006175  0.013599 -0.074517 -0.002183   
+         PS2             -0.059613 -0.036149 -0.000302 -0.005218  0.014285 -0.003012   
+         PS3             -0.123083  0.021933 -0.006493 -0.003976  0.106497 -0.002295   
+         PS4             -0.051139  0.009634 -0.003454 -0.002115  0.053862 -0.001221   
+         PSP              0.036241  0.000625 -0.006183 -0.003786 -0.050484 -0.002186   
+         PSV              0.019262 -0.011320 -0.003609 -0.002210 -0.009151 -0.001276   
+         SAT              0.076775 -0.031434 -0.002279 -0.001396 -0.033166 -0.000806   
+         SCD              0.014225 -0.005824 -0.000422 -0.000259 -0.006145 -0.000149   
+         SNES             0.090423 -0.037022 -0.002685 -0.001644 -0.039062 -0.000949   
+         TG16             0.008212 -0.003362 -0.000244 -0.000149 -0.003547 -0.000086   
+         WS               0.014225 -0.005824 -0.000422 -0.000259 -0.006145 -0.000149   
+         Wii             -0.012274  0.101570  0.014105 -0.003943 -0.068004 -0.002276   
+         WiiU            -0.023820  0.068508 -0.002099 -0.001285  0.002758 -0.000742   
+         X360            -0.168117  0.050140 -0.006291 -0.003852  0.137109 -0.002224   
+         XB              -0.109102 -0.037657 -0.005009 -0.003067  0.076465 -0.001771   
+         XOne            -0.055407  0.018020 -0.002730 -0.001671  0.080557 -0.000965   
+         AO              -0.010494 -0.002377 -0.000172 -0.000106 -0.002508 -0.000061   
+         E                1.000000 -0.409431 -0.029689 -0.018178 -0.431995 -0.010494   
+         E10+            -0.409431  1.000000 -0.006726 -0.004118 -0.097861 -0.002377   
+         EC              -0.029689 -0.006726  1.000000 -0.000299 -0.007096 -0.000172   
+         K-A             -0.018178 -0.004118 -0.000299  1.000000 -0.004345 -0.000106   
+         M               -0.431995 -0.097861 -0.007096 -0.004345  1.000000 -0.002508   
+         RP              -0.010494 -0.002377 -0.000172 -0.000106 -0.002508  1.000000   
+         T               -0.623345 -0.141208 -0.010239 -0.006269 -0.148989 -0.003619   
+         
+                                 T  
+         Year\_of\_Release  0.050496  
+         NA\_Sales        -0.003826  
+         EU\_Sales        -0.000786  
+         JP\_Sales        -0.039824  
+         Other\_Sales      0.012325  
+         Global\_Sales    -0.008694  
+         Critic\_Score     0.360702  
+         User\_Score       0.387584  
+         Genre\_Labels    -0.019252  
+         Platform\_Labels  0.134540  
+         Rating\_Labels    0.874224  
+         Action           0.033847  
+         Adventure       -0.067869  
+         Fighting         0.151609  
+         Misc            -0.037899  
+         Platform.1      -0.065531  
+         Puzzle          -0.079142  
+         Racing          -0.030228  
+         Role-Playing     0.085229  
+         Shooter          0.065527  
+         Simulation       0.025082  
+         Sports          -0.097877  
+         Strategy         0.032304  
+         2600            -0.039119  
+         3DO             -0.006269  
+         3DS             -0.040038  
+         DC               0.002270  
+         DS              -0.119606  
+         GB              -0.035752  
+         GBA             -0.056136  
+         {\ldots}                   {\ldots}  
+         GG              -0.003619  
+         N64             -0.064966  
+         NES             -0.035936  
+         NG              -0.012542  
+         PC               0.084389  
+         PCFX            -0.003619  
+         PS              -0.087158  
+         PS2              0.090627  
+         PS3              0.057764  
+         PS4              0.016352  
+         PSP             -0.006822  
+         PSV             -0.008581  
+         SAT             -0.047857  
+         SCD             -0.008867  
+         SNES            -0.056365  
+         TG16            -0.005119  
+         WS              -0.008867  
+         Wii             -0.007456  
+         WiiU            -0.022049  
+         X360             0.070292  
+         XB               0.105779  
+         XOne            -0.004859  
+         AO              -0.003619  
+         E               -0.623345  
+         E10+            -0.141208  
+         EC              -0.010239  
+         K-A             -0.006269  
+         M               -0.148989  
+         RP              -0.003619  
+         T                1.000000  
+         
+         [62 rows x 62 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{x\PYZus{}treino}\PY{p}{,} \PY{n}{x\PYZus{}teste}\PY{p}{,} \PY{n}{y\PYZus{}treino}\PY{p}{,} \PY{n}{y\PYZus{}teste} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df\PYZus{}RNA}\PY{p}{,}\PY{n}{classes\PYZus{}RNA}\PY{p}{,}\PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{n}{mlp} \PY{o}{=} \PY{n}{MLPRegressor}\PY{p}{(}\PY{n}{hidden\PYZus{}layer\PYZus{}sizes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} 
+                           \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tanh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mlp}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}treino}\PY{p}{,} \PY{n}{y\PYZus{}treino}\PY{p}{)}
+             
+         \PY{n}{mlp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}teste}\PY{p}{)}
+         \PY{n}{result} \PY{o}{=} \PY{n}{mlp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{x\PYZus{}teste}\PY{p}{,}\PY{n}{y\PYZus{}teste}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{result}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.4851610633691994\%
+
+    \end{Verbatim}
+
+    \subsubsection{Hipótese:}\label{hipuxf3tese}
+
+\paragraph{É possível prever o número de vendas globais de uma publisher
+baseado no gênero e rating do game a ser
+lançado?}\label{uxe9-possuxedvel-prever-o-nuxfamero-de-vendas-globais-de-uma-publisher-baseado-no-guxeanero-e-rating-do-game-a-ser-lanuxe7ado}
+
+    A correlação entre as categorias binarizadas que levamos em conta
+(Gênero e Rating) e as vendas globais eram muito praticamente nulas, o
+que já nos levava à esperar um péssimo resultado, o que acabou sendo
+confirmado com a taxa de acerto da rede neural após 100 ciclos de
+treinamento. Com isso, a nossa hipótese de prever as vendas globais de
+uma publisher baseado no gênero e rating do game a ser lançado foi
+refutada.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
